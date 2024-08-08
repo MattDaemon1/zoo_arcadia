@@ -34,4 +34,3 @@ class CreateVisitesTable extends Migration
         Schema::dropIfExists('visites');
     }
 }
-
