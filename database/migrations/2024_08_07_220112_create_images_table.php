@@ -1,29 +1,51 @@
 <?php
 
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-$file = new UploadedFile(
-    'chemin/vers/l/image.jpg',
-    'image.jpg',
-    'image/jpeg',
-    null,
-    true
-);
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('images', function (Blueprint $table) {
+            $table->id();
+            $table->longBlob('image_data');
+            $table->string('nom_fichier');
+            $table->string('type_mime');
+            $table->unsignedInteger('taille');
+            $table->string('alt')->nullable();
+            $table->foreignId('habitat_id')->constrained('habitats');
+            $table->timestamps();
+        });
 
-$animal = Animal::find(1); // Remplacez 1 par l'ID de l'animal
+        // Ajout de la relation many-to-many entre habitats et images
+        Schema::create('habitats_images', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('habitat_id')->constrained('habitats')->onDelete('cascade');
+            $table->foreignId('image_id')->constrained('images')->onDelete('cascade');
+            $table->timestamps();
+        });
 
-$path = Storage::disk('public')->putFile('animals', $file);
+        // Indexation
+        Schema::table('images', function (Blueprint $table) {
+            $table->index('habitat_id');
+        });
 
-$habitat = Habitat::find(1); // Remplacez 1 par l'ID de l'habitat
+        Schema::table('habitats_images', function (Blueprint $table) {
+            $table->index(['habitat_id', 'image_id']);
+        });
+    }
 
-$path = Storage::disk('public')->putFile('habitats', $file);
-
-$image = new Image([
-    'path' => $path,
-    'type' => $file->getClientMimeType(),
-]);
-
-$animal->images()->save($image);
-$habitat->images()->save($image);
-
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('habitats_images');
+        Schema::dropIfExists('images');
+    }
+};
