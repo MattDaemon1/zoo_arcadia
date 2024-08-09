@@ -9,6 +9,7 @@ use App\Http\Controllers\RaceController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\AviController;
 use App\Http\Controllers\ConsommationController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\HomeController;
 
 
@@ -27,3 +28,4 @@ Route::resource('races', RaceController::class);
 Route::resource('services', ServiceController::class);
 Route::resource('avis', AviController::class);
 Route::resource('consommations', ConsommationController::class);
+Route::resource('roles', RoleController::class);
