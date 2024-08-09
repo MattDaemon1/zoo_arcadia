@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
 Route::resource('images', ImageController::class);
 Route::resource('visites', VisiteController::class);
 Route::resource('animals', AnimalController::class);
