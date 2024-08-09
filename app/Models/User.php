@@ -2,46 +2,44 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+/**
+ * Class User
+ *
+ * @property $id
+ * @property $name
+ * @property $email
+ * @property $email_verified_at
+ * @property $password
+ * @property $remember_token
+ * @property $created_at
+ * @property $updated_at
+ * @property $role_id
+ *
+ * @property Role $role
+ * @package App
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ */
+class User extends Model
 {
-    use HasFactory, Notifiable;
+    
+    protected $perPage = 20;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $fillable = ['name', 'email', 'role_id'];
+
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    public function role()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->belongsTo(\App\Models\Role::class, 'role_id', 'id');
     }
+    
 }

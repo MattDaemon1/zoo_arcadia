@@ -15,14 +15,12 @@ class CreateConsommationsTable extends Migration
     {
         Schema::create('consommations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('product_id');
-            $table->integer('quantity');
-            $table->decimal('price', 8, 2);
+            $table->foreignId('animal_id')->constrained('animals', 'animal_id')->onDelete('cascade');
+            $table->date('date');
+            $table->time('heure');
+            $table->string('nourriture');
+            $table->integer('quantite');
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 
@@ -36,4 +34,3 @@ class CreateConsommationsTable extends Migration
         Schema::dropIfExists('consommations');
     }
 }
-

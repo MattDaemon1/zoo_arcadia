@@ -14,7 +14,7 @@ class CreateAvisTable extends Migration
     public function up()
     {
         Schema::create('avis', function (Blueprint $table) {
-            $table->bigIncrements('avis_id');
+            $table->id();
             $table->string('pseudo');
             $table->string('commentaire');
             $table->boolean('isVisible');

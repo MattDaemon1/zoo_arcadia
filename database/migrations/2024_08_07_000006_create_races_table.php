@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHabitatsTable extends Migration
+class CreateRacesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateHabitatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('habitats', function (Blueprint $table) {
-            $table->bigIncrements('habitat_id');
-            $table->string('nom', 50);
-            $table->string('description', 50);
-            $table->string('commentaire_habitat', 50);
+        Schema::create('races', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateHabitatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('habitats');
+        Schema::dropIfExists('races');
     }
 }

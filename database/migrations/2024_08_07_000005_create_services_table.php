@@ -14,10 +14,10 @@ class CreateServicesTable extends Migration
     public function up()
     {
         Schema::create('services', function (Blueprint $table) {
-            $table->bigIncrements('service_id');
-            $table->string('nom', 50);
-            $table->string('description', 50);
-            $table->timestamps();
+            $table->id();  // Clé primaire auto-incrémentée
+            $table->string('nom');
+            $table->text('description')->nullable();
+            $table->timestamps();  // Colonnes created_at et updated_at
         });
     }
 
@@ -31,4 +31,3 @@ class CreateServicesTable extends Migration
         Schema::dropIfExists('services');
     }
 }
-
