@@ -11,6 +11,8 @@ use App\Http\Controllers\AviController;
 use App\Http\Controllers\ConsommationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DashboardController;
+
 
 
 Route::get('/', function () {
@@ -19,13 +21,18 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
-Route::resource('images', ImageController::class);
-Route::resource('visites', VisiteController::class);
-Route::resource('animals', AnimalController::class);
-Route::resource('habitats', HabitatController::class);
-Route::resource('races', RaceController::class);
-Route::resource('services', ServiceController::class);
-Route::resource('avis', AviController::class);
-Route::resource('consommations', ConsommationController::class);
-Route::resource('roles', RoleController::class);
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('images', ImageController::class);
+    Route::resource('visites', VisiteController::class);
+    Route::resource('animals', AnimalController::class);
+    Route::resource('habitats', HabitatController::class);
+    Route::resource('races', RaceController::class);
+    Route::resource('services', ServiceController::class);
+    Route::resource('avis', AviController::class);
+    Route::resource('consommations', ConsommationController::class);
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', User::class);
+});
