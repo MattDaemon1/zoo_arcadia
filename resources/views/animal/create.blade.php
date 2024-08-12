@@ -17,7 +17,7 @@
                         <form method="POST" action="{{ route('animals.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
 
-                            @include('animal.form')
+                            @include('animal.form') <!-- Chemin correct sans l'extension .blade.php -->
 
                         </form>
                     </div>
@@ -26,3 +26,4 @@
         </div>
     </section>
 @endsection
+

@@ -14,10 +14,10 @@
                         <span class="card-title">{{ __('Create') }} User</span>
                     </div>
                     <div class="card-body bg-white">
-                        <form method="POST" action="{{ route('users.store') }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('animal.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
 
-                            @include('user.form')
+                            @include('form.blade.php')
 
                         </form>
                     </div>

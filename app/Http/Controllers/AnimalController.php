@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\AnimalRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Race;
 
 class AnimalController extends Controller
 {
@@ -25,21 +26,28 @@ class AnimalController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function create()
     {
+        $races = Race::pluck('name', 'id');
         $animal = new Animal();
 
-        return view('animal.create', compact('animal'));
+        return view('animal.create', compact('races', 'animal'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(AnimalRequest $request): RedirectResponse
+    public function store(Request $request)
     {
-        Animal::create($request->validated());
+        $validatedData = $request->validate([
+            'prenom' => 'required|string|max:255',
+            'etat' => 'required|string|max:255',
+            'race_id' => 'required|exists:races,id',
+        ]);
 
-        return Redirect::route('animals.index')
+        Animal::create($validatedData);
+
+        return redirect()->route('animals.index')
             ->with('success', 'Animal created successfully.');
     }
 
@@ -56,11 +64,12 @@ class AnimalController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id): View
+    public function edit($id)
     {
-        $animal = Animal::find($id);
+        $races = Race::pluck('name', 'id');
+        $animal = Animal::findOrFail($id);
 
-        return view('animal.edit', compact('animal'));
+        return view('animal.edit', compact('races', 'animal'));
     }
 
     /**

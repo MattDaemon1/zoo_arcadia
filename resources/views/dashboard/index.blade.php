@@ -12,7 +12,9 @@
 
                     @if($user->role->name === 'admin')
                         <p>Vous avez les privilèges d'administrateur.</p>
-                        <!-- Contenu spécifique à l'admin -->
+                        <a href="{{ route('users') }}">Gérer les utilisateurs</a>
+                        <a href="{{ route('services') }}">Gérer les services</a>
+                        <!-- Ajoutez d'autres liens et fonctionnalités spécifiques à l'admin -->
                     @elseif($user->role->name === 'veterinaire')
                         <p>Vous êtes un vétérinaire.</p>
                         <!-- Contenu spécifique au vétérinaire -->

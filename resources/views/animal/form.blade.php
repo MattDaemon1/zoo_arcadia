@@ -12,10 +12,17 @@
             {!! $errors->first('etat', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
         <div class="form-group mb-2 mb20">
-            <label for="race_id" class="form-label">{{ __('Race Id') }}</label>
-            <input type="text" name="race_id" class="form-control @error('race_id') is-invalid @enderror" value="{{ old('race_id', $animal?->race_id) }}" id="race_id" placeholder="Race Id">
-            {!! $errors->first('race_id', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
+        <label for="race_id" class="form-label">{{ __('Race') }}</label>
+        <select name="race_id" class="form-control @error('race_id') is-invalid @enderror" id="race_id">
+            <option value="">-- Select Race --</option>
+            @foreach($races as $id => $name)
+                <option value="{{ $id }}" {{ (old('race_id') ?? $animal->race_id) == $id ? 'selected' : '' }}>
+                    {{ $name }}
+                </option>
+            @endforeach
+        </select>
+        {!! $errors->first('race_id', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+    </div>
 
     </div>
     <div class="col-md-12 mt20 mt-2">

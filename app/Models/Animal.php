@@ -19,7 +19,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Animal extends Model
 {
-    
+    public function race()
+    {
+        return $this->belongsTo(Race::class);
+    }
     protected $perPage = 20;
 
     /**

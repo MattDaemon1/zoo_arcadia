@@ -50,7 +50,8 @@
                                             
 										<td >{{ $animal->prenom }}</td>
 										<td >{{ $animal->etat }}</td>
-										<td >{{ $animal->race_id }}</td>
+										<td>{{ $animal->race->name }}</td> 
+
 
                                             <td>
                                                 <form action="{{ route('animals.destroy', $animal->id) }}" method="POST">

@@ -6,8 +6,10 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Role;
 
 class UserController extends Controller
 {
@@ -28,8 +30,9 @@ class UserController extends Controller
     public function create(): View
     {
         $user = new User();
+        $roles = Role::pluck('label', 'id'); // Charge les rôles avec le nom comme label et l'ID comme valeur
 
-        return view('user.create', compact('user'));
+        return view('user.create', compact('user', 'roles'));
     }
 
     /**
@@ -37,7 +40,12 @@ class UserController extends Controller
      */
     public function store(UserRequest $request): RedirectResponse
     {
-        User::create($request->validated());
+        $validatedData = $request->validated();
+
+        // Hash the password before saving
+        $validatedData['password'] = Hash::make($request->password);
+
+        User::create($validatedData);
 
         return Redirect::route('users.index')
             ->with('success', 'User created successfully.');
@@ -59,8 +67,9 @@ class UserController extends Controller
     public function edit($id): View
     {
         $user = User::find($id);
+        $roles = Role::pluck('label', 'id'); // Charge les rôles avec le nom comme label et l'ID comme valeur
 
-        return view('user.edit', compact('user'));
+        return view('user.edit', compact('user', 'roles'));
     }
 
     /**
@@ -68,12 +77,25 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user): RedirectResponse
     {
-        $user->update($request->validated());
+        $validatedData = $request->validated();
+
+        // Only hash the password if it's being updated
+        if ($request->filled('password')) {
+            $validatedData['password'] = Hash::make($request->password);
+        } else {
+            // Exclude the password from being updated if it's not provided
+            unset($validatedData['password']);
+        }
+
+        $user->update($validatedData);
 
         return Redirect::route('users.index')
             ->with('success', 'User updated successfully');
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy($id): RedirectResponse
     {
         User::find($id)->delete();

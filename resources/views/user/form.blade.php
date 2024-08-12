@@ -12,9 +12,28 @@
             {!! $errors->first('email', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
         <div class="form-group mb-2 mb20">
-            <label for="role_id" class="form-label">{{ __('Role Id') }}</label>
-            <input type="text" name="role_id" class="form-control @error('role_id') is-invalid @enderror" value="{{ old('role_id', $user?->role_id) }}" id="role_id" placeholder="Role Id">
+            <label for="role_id" class="form-label">{{ __('Role') }}</label>
+            <select name="role_id" class="form-control @error('role_id') is-invalid @enderror" id="role_id">
+                <option value="">-- Select Role --</option>
+                @foreach($roles as $id => $label)
+                    <option value="{{ $id }}" {{ (old('role_id') ?? $user->role_id) == $id ? 'selected' : '' }}>
+                        {{ $label }}
+                    </option>
+                @endforeach
+            </select>
             {!! $errors->first('role_id', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+        </div>
+
+        <div class="form-group mb-2 mb20">
+            <label for="password" class="form-label">{{ __('Password') }}</label>
+            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Password">
+            {!! $errors->first('password', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+        </div>
+
+        <div class="form-group mb-2 mb20">
+            <label for="password_confirmation" class="form-label">{{ __('Confirm Password') }}</label>
+            <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation" placeholder="Confirm Password">
+            {!! $errors->first('password_confirmation', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
 
     </div>

@@ -21,7 +21,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Consommation extends Model
 {
-    
+    public function animal()
+    {
+        return $this->belongsTo(Animal::class);
+    }
+
     protected $perPage = 20;
 
     /**

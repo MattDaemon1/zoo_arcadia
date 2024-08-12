@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Consommation;
+use App\Models\Animal;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\ConsommationRequest;
@@ -28,8 +29,9 @@ class ConsommationController extends Controller
     public function create(): View
     {
         $consommation = new Consommation();
+        $animals = Animal::with('race')->get();
 
-        return view('consommation.create', compact('consommation'));
+        return view('consommation.create', compact('consommation', 'animals'));
     }
 
     /**
@@ -39,7 +41,7 @@ class ConsommationController extends Controller
     {
         Consommation::create($request->validated());
 
-        return Redirect::route('consommations.index')
+        return Redirect::route('consommation.index')
             ->with('success', 'Consommation created successfully.');
     }
 
@@ -48,7 +50,7 @@ class ConsommationController extends Controller
      */
     public function show($id): View
     {
-        $consommation = Consommation::find($id);
+        $consommation = Consommation::findOrFail($id);
 
         return view('consommation.show', compact('consommation'));
     }
@@ -59,8 +61,9 @@ class ConsommationController extends Controller
     public function edit($id): View
     {
         $consommation = Consommation::find($id);
+        $animals = Animal::with('race')->get();
 
-        return view('consommation.edit', compact('consommation'));
+        return view('consommations.edit', compact('consommation', 'animals'));
     }
 
     /**
@@ -70,15 +73,16 @@ class ConsommationController extends Controller
     {
         $consommation->update($request->validated());
 
-        return Redirect::route('consommations.index')
+        return Redirect::route('consommation.index')
             ->with('success', 'Consommation updated successfully');
     }
 
     public function destroy($id): RedirectResponse
     {
-        Consommation::find($id)->delete();
+        $consommation = Consommation::findOrFail($id);
+        $consommation->delete();
 
-        return Redirect::route('consommations.index')
+        return Redirect::route('consommation.index')
             ->with('success', 'Consommation deleted successfully');
     }
 }

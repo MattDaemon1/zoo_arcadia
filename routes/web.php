@@ -10,10 +10,9 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\AviController;
 use App\Http\Controllers\ConsommationController;
 use App\Http\Controllers\RoleController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
-
-
+use App\Models\User;
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,11 +27,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('images', ImageController::class);
     Route::resource('visites', VisiteController::class);
     Route::resource('animals', AnimalController::class);
-    Route::resource('habitats', HabitatController::class);
+    Route::resource('/habitats', HabitatController::class);
     Route::resource('races', RaceController::class);
     Route::resource('services', ServiceController::class);
     Route::resource('avis', AviController::class);
     Route::resource('consommations', ConsommationController::class);
     Route::resource('roles', RoleController::class);
-    Route::resource('users', User::class);
+    Route::resource('users', UserController::class);
 });

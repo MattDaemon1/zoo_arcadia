@@ -50,11 +50,12 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-										<td >{{ $consommation->animal_id }}</td>
-										<td >{{ $consommation->date }}</td>
-										<td >{{ $consommation->heure }}</td>
-										<td >{{ $consommation->nourriture }}</td>
-										<td >{{ $consommation->quantite }}</td>
+                                            <td>{{ $consommation->animal->prenom }}</td>
+                                            <td>{{ $consommation->animal->race->name }}</td>
+                                            <td >{{ $consommation->date }}</td>
+                                            <td >{{ $consommation->heure }}</td>
+                                            <td >{{ $consommation->nourriture }}</td>
+                                            <td >{{ $consommation->quantite }}</td>
 
                                             <td>
                                                 <form action="{{ route('consommations.destroy', $consommation->id) }}" method="POST">
