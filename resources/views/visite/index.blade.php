@@ -36,9 +36,11 @@
                                     <tr>
                                         <th>No</th>
                                         
-									<th >Animal Id</th>
-									<th >Date Visite</th>
-									<th >Remarques</th>
+                                        <th>Prenom</th>
+                                        <th>Race</th>
+                                        <th>Date Visite</th>
+                                        <th>Remarques</th>
+                                        <th>Actions</th>
 
                                         <th></th>
                                     </tr>
@@ -48,9 +50,10 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-										<td >{{ $visite->animal_id }}</td>
-										<td >{{ $visite->date_visite }}</td>
-										<td >{{ $visite->remarques }}</td>
+                                            <td>{{ $visite->animal->prenom }}</td>
+                                            <td>{{ $visite->animal->race->name }}</td>
+                                            <td >{{ $visite->date_visite }}</td>
+                                            <td >{{ $visite->remarques }}</td>
 
                                             <td>
                                                 <form action="{{ route('visites.destroy', $visite->id) }}" method="POST">

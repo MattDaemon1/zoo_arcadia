@@ -2,8 +2,15 @@
     <div class="col-md-12">
         
         <div class="form-group mb-2 mb20">
-            <label for="animal_id" class="form-label">{{ __('Animal Id') }}</label>
-            <input type="text" name="animal_id" class="form-control @error('animal_id') is-invalid @enderror" value="{{ old('animal_id', $visite?->animal_id) }}" id="animal_id" placeholder="Animal Id">
+            <label for="animal_id" class="form-label">{{ __('Animal') }}</label>
+            <select name="animal_id" class="form-control @error('animal_id') is-invalid @enderror" id="animal_id">
+                <option value="">{{ __('Select Animal') }}</option>
+                @foreach($animals as $animal)
+                    <option value="{{ $animal->id }}" {{ old('animal_id', $visite?->animal_id) == $animal->id ? 'selected' : '' }}>
+                        {{ $animal->prenom }} - {{ $animal->race->name }}
+                    </option>
+                @endforeach
+            </select>
             {!! $errors->first('animal_id', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
         <div class="form-group mb-2 mb20">

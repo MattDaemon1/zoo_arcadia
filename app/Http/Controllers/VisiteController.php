@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Visite;
+use App\Models\Animal;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\VisiteRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+
 
 class VisiteController extends Controller
 {
@@ -28,8 +30,9 @@ class VisiteController extends Controller
     public function create(): View
     {
         $visite = new Visite();
+        $animals = Animal::with('race')->get();
 
-        return view('visite.create', compact('visite'));
+        return view('visite.create', compact('visite', 'animals'));
     }
 
     /**
@@ -58,9 +61,10 @@ class VisiteController extends Controller
      */
     public function edit($id): View
     {
-        $visite = Visite::find($id);
+        $visite = Visite::findOrFail($id);
+        $animals = Animal::with('race')->get();
 
-        return view('visite.edit', compact('visite'));
+        return view('visite.edit', compact('visite', 'animals'));
     }
 
     /**
