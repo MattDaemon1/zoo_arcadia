@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Animal;
+use App\Models\Visite;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     /**
-     * Affiche le tableau de bord pour les employés, vétérinaires, et administrateurs.
+     * Show the admin dashboard.
      *
      * @return \Illuminate\View\View
      */
     public function index()
     {
-        // Tu peux utiliser Auth::user() pour récupérer les informations de l'utilisateur connecté.
-        $user = Auth::user();
+        $animals = Animal::all(); // Pour le filtre par animal
 
-        return view('dashboard.index', compact('user'));
+        return view('dashboard.index', compact('animals'));
     }
 }

@@ -17,7 +17,10 @@ use App\Models\User;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    // Ajoutez d'autres routes d'administration ici
+});
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
