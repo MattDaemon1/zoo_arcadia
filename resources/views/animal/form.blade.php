@@ -12,6 +12,18 @@
             {!! $errors->first('etat', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
         <div class="form-group mb-2 mb20">
+    <label for="habitat_id" class="form-label">{{ __('Habitat') }}</label>
+    <select name="habitat_id" class="form-control @error('habitat_id') is-invalid @enderror" id="habitat_id">
+        <option value="">-- Select Habitat --</option>
+        @foreach($habitats as $id => $nom)
+            <option value="{{ $id }}" {{ (old('habitat_id') ?? $animal->habitat_id) == $id ? 'selected' : '' }}>
+                {{ $nom }}
+            </option>
+        @endforeach
+    </select>
+    {!! $errors->first('habitat_id', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+</div>
+    <div class="form-group mb-2 mb20">
         <label for="race_id" class="form-label">{{ __('Race') }}</label>
         <select name="race_id" class="form-control @error('race_id') is-invalid @enderror" id="race_id">
             <option value="">-- Select Race --</option>

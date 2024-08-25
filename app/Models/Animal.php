@@ -23,6 +23,12 @@ class Animal extends Model
     {
         return $this->belongsTo(Race::class);
     }
+
+    public function habitat()
+    {
+        return $this->belongsTo(Habitat::class);
+    }
+
     protected $perPage = 20;
 
     /**
@@ -30,7 +36,5 @@ class Animal extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['prenom', 'etat', 'race_id'];
-
-
+    protected $fillable = ['prenom', 'etat', 'race_id', 'habitat_id'];
 }

@@ -9,6 +9,7 @@ use App\Http\Requests\AnimalRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\Race;
+use App\Models\Habitat;
 
 class AnimalController extends Controller
 {
@@ -29,9 +30,10 @@ class AnimalController extends Controller
     public function create()
     {
         $races = Race::pluck('name', 'id');
+        $habitats = Habitat::pluck('nom', 'id');
         $animal = new Animal();
 
-        return view('animal.create', compact('races', 'animal'));
+        return view('animal.create', compact('races', 'animal', 'habitats'));
     }
 
     /**
@@ -43,6 +45,7 @@ class AnimalController extends Controller
             'prenom' => 'required|string|max:255',
             'etat' => 'required|string|max:255',
             'race_id' => 'required|exists:races,id',
+            'habitat_id' => 'required|string|max:255',
         ]);
 
         Animal::create($validatedData);
@@ -67,9 +70,10 @@ class AnimalController extends Controller
     public function edit($id)
     {
         $races = Race::pluck('name', 'id');
+        $habitats = Habitat::pluck('nom', 'id');
         $animal = Animal::findOrFail($id);
 
-        return view('animal.edit', compact('races', 'animal'));
+        return view('animal.edit', compact('races', 'animal', 'habitats'));
     }
 
     /**

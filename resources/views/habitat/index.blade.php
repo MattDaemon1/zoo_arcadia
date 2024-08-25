@@ -16,6 +16,12 @@
                                 {{ __('Habitats') }}
                             </span>
 
+                            <div class="float-right">
+                                <a href="{{ route('dashboard') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                  {{ __('Dashboard') }}
+                                </a>
+                            </div>
+
                              <div class="float-right">
                                 <a href="{{ route('habitats.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}

@@ -16,6 +16,12 @@
                                 {{ __('Consommations') }}
                             </span>
 
+                            <div class="float-right">
+                                <a href="{{ route('dashboard') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                  {{ __('Dashboard') }}
+                                </a>
+                            </div>
+
                              <div class="float-right">
                                 <a href="{{ route('consommations.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
