@@ -17,8 +17,8 @@ class CreateAnimalsTable extends Migration
             $table->id();
             $table->string('prenom');
             $table->string('etat');
-            $table->unsignedBigInteger('race_id');
-            $table->foreign('race_id')->references('race_id')->on('races');
+            $table->foreignId('race_id')->constrained('races')->onDelete('cascade');
+            $table->foreignId('habitat_id')->constrained('habitats')->onDelete('cascade');
             $table->timestamps();
         });
     }

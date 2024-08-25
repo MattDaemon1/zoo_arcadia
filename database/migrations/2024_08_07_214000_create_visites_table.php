@@ -15,6 +15,7 @@ class CreateVisitesTable extends Migration
     {
         Schema::create('visites', function (Blueprint $table) {
             $table->id();
+            
             $table->foreignId('animal_id')->constrained('animals', 'animal_id')->onDelete('cascade');
             $table->date('date_visite');
             $table->text('remarques')->nullable();

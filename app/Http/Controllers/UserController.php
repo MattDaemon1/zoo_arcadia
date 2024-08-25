@@ -32,7 +32,7 @@ class UserController extends Controller
         $user = new User();
         $roles = Role::pluck('label', 'id'); // Charge les rôles avec le nom comme label et l'ID comme valeur
 
-        return view('user.create', compact('user', 'roles'));
+        return view('user.form', compact('user', 'roles'));
     }
 
     /**

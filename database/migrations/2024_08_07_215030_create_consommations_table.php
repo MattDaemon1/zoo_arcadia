@@ -17,7 +17,6 @@ class CreateConsommationsTable extends Migration
             $table->id();
             $table->foreignId('animal_id')->constrained('animals', 'animal_id')->onDelete('cascade');
             $table->date('date');
-            $table->time('heure');
             $table->string('nourriture');
             $table->integer('quantite');
             $table->timestamps();

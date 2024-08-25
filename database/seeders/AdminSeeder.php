@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Role;
-
+use Illuminate\Support\Str; // Ajoutez cette ligne pour utiliser Str
 
 class AdminSeeder extends Seeder
 {
@@ -24,10 +24,11 @@ class AdminSeeder extends Seeder
             'name' => 'José',
             'email' => 'jose@arcadia.fr',
             'password' => bcrypt('Maboule35!'),
-            'role_id' => 1,
+            'role_id' => $adminRole->id, // Utilisez l'ID du rôle admin créé
+            'remember_token' => Str::random(10), // Ajoutez remember_token
+            'email_verified_at' => now(), // Ajoutez email_verified_at avec l'horodatage actuel
         ]);
 
-        // Assign the admin role to the admin user
-        $adminUser->roles()->attach($adminRole);
+        // Pas besoin d'attacher explicitement le rôle ici puisque vous utilisez 'role_id'
     }
 }
