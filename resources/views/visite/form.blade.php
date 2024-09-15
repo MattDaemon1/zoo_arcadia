@@ -23,6 +23,7 @@
             <input type="text" name="remarques" class="form-control @error('remarques') is-invalid @enderror" value="{{ old('remarques', $visite?->remarques) }}" id="remarques" placeholder="Remarques">
             {!! $errors->first('remarques', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
+        
 
     </div>
     <div class="col-md-12 mt20 mt-2">

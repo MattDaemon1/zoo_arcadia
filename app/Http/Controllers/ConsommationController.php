@@ -30,6 +30,7 @@ class ConsommationController extends Controller
     {
         $consommation = new Consommation();
         $animals = Animal::with('race')->get();
+        
 
         return view('consommation.create', compact('consommation', 'animals'));
     }

@@ -21,6 +21,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Consommation extends Model
 {
+    public function employe()
+    {
+        return $this->belongsTo(Employe::class, 'employe_id');
+    }
+    
     public function animal()
     {
         return $this->belongsTo(Animal::class);
