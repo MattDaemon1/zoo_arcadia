@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Avi;
 use App\Models\Habitat;
 use App\Models\Service;
-use App\Models\Avis;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller

@@ -12,17 +12,20 @@ use App\Http\Controllers\ConsommationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactController;
 use App\Models\User;
+use HomeController as GlobalHomeController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
+    
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('images', ImageController::class);
     Route::resource('visites', VisiteController::class);
