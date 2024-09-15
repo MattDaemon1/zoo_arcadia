@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Habitat
@@ -20,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Habitat extends Model
 {
-    
+    use HasFactory;
     protected $perPage = 20;
 
     /**
@@ -38,5 +39,8 @@ class Habitat extends Model
     {
         return $this->hasMany(\App\Models\Image::class, 'id', 'habitat_id');
     }
-    
+    public function animals()
+    {
+        return $this->hasMany(Animal::class);
+    }
 }
