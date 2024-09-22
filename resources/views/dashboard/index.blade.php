@@ -54,6 +54,16 @@
 
                     <div class="col-md-6">
                         <div class="card mb-4">
+                            <div class="card-header">{{ __('Manage Images') }}</div>
+                            <div class="card-body">
+                                <a href="{{ route('images.index') }}" class="btn btn-primary">{{ __('Voir les images') }}</a>
+                                <a href="{{ route('images.create') }}" class="btn btn-success">{{ __('Créer une nouvelle image') }}</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card mb-4">
                             <div class="card-header">{{ __('Manage Races') }}</div>
                             <div class="card-body">
                                 <a href="{{ route('races.index') }}" class="btn btn-primary">{{ __('View Races') }}</a>

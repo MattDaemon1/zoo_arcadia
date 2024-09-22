@@ -21,6 +21,7 @@ class HabitatController extends Controller
         return view('habitat.index', compact('habitats'))
             ->with('i', ($request->input('page', 1) - 1) * $habitats->perPage());
     }
+    
 
     /**
      * Show the form for creating a new resource.

@@ -16,5 +16,6 @@ class HomeController extends Controller
         $avis = Avi::latest()->take(4)->get();
 
         return view('home', compact('habitats', 'services', 'avis'));
+        
     }
 }

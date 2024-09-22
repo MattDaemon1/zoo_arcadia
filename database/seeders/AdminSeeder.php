@@ -41,6 +41,8 @@ class AdminSeeder extends Seeder
             'email_verified_at' => now(), // Ajoutez email_verified_at avec l'horodatage actuel
         ]);
 
+        
+
         // Pas besoin d'attacher explicitement le rôle ici puisque vous utilisez 'role_id'
     }
 }

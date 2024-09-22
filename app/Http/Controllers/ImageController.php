@@ -35,12 +35,33 @@ class ImageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ImageRequest $request): RedirectResponse
+    public function store(Request $request)
     {
-        Image::create($request->validated());
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'nom_fichier' => 'required|string|max:255',
+            'alt' => 'nullable|string|max:255',
+            'habitat_id' => 'required|exists:habitats,id',
+        ]);
 
-        return Redirect::route('images.index')
-            ->with('success', 'Image created successfully.');
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images', $imageName);
+
+            $newImage = new Image;
+            $newImage->image_data = 'images/' . $imageName; // Stocke le chemin relatif
+            $newImage->nom_fichier = $request->nom_fichier;
+            $newImage->type_mime = $image->getMimeType();
+            $newImage->taille = $image->getSize();
+            $newImage->alt = $request->alt;
+            $newImage->habitat_id = $request->habitat_id;
+            $newImage->save();
+
+            return redirect()->back()->with('success', 'Image uploaded successfully');
+        }
+
+        return redirect()->back()->with('error', 'Failed to upload image');
     }
 
     /**

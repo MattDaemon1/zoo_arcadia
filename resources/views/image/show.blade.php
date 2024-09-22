@@ -22,27 +22,53 @@
                         
                                 <div class="form-group mb-2 mb20">
                                     <strong>Image Data:</strong>
-                                    {{ $image->image_data }}
+                                    @if ($image !== null)
+                                        {{ $image->image_data }}
+                                    @else
+                                        L'image n'a pas été trouvée
+                                    @endif
                                 </div>
                                 <div class="form-group mb-2 mb20">
                                     <strong>Nom Fichier:</strong>
-                                    {{ $image->nom_fichier }}
+                                    @if ($image !== null)
+                                        {{ $image->nom_fichier }}
+                                    @else
+                                        Le nom n'a pas été trouvé
+                                    @endif
                                 </div>
                                 <div class="form-group mb-2 mb20">
                                     <strong>Type Mime:</strong>
-                                    {{ $image->type_mime }}
+                                    @if ($image !== null)
+                                        {{ $image->type_mime }}
+                                    @else
+                                        Type mine n'a pas été trouvé
+                                    @endif
                                 </div>
                                 <div class="form-group mb-2 mb20">
                                     <strong>Taille:</strong>
-                                    {{ $image->taille }}
+                                    @if ($image !== null)
+                                        {{ $image->taille }}
+                                    @else
+                                        Taille n'a pas été trouvé
+                                    @endif
+                                    
                                 </div>
                                 <div class="form-group mb-2 mb20">
                                     <strong>Alt:</strong>
-                                    {{ $image->alt }}
+                                    @if ($image !== null)
+                                        {{ $image->alt }}
+                                    @else
+                                        Alt n'a pas été trouvé
+                                    @endif
+                                    
                                 </div>
                                 <div class="form-group mb-2 mb20">
                                     <strong>Habitat Id:</strong>
-                                    {{ $image->habitat_id }}
+                                    @if ($image !== null)
+                                        {{ $image->habitat_id }}
+                                    @else
+                                        Habitat Id n'a pas été trouvé
+                                    @endif
                                 </div>
 
                     </div>
