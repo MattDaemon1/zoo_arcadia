@@ -16,6 +16,19 @@ class HomeController extends Controller
         $avis = Avi::latest()->take(4)->get();
 
         return view('home', compact('habitats', 'services', 'avis'));
-        
+    }
+
+    public function habitats()
+    {
+        $habitats = Habitat::with(['animals.race'])->get();
+
+        return view('habitats', compact('habitats', 'animals'));
+    }
+
+    public function services()
+    {
+        $services = Service::all();
+
+        return view('services', compact('services'));
     }
 }
